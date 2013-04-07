@@ -20,8 +20,8 @@ Loading Page plugin performs a pre-loading of images on your website and display
 * Allows to choose a loading progress screen. 
 * Allows to select the colors of the loading progress screen.
 * Allows to display or remove the text showing the loading percentage.
-*	Lazy Loading feature allows to load faster and reduce the bandwidth consumption. 
-* Allows to select an image as a placeholder, to replace the real images during pre-loading. 
+* Lazy Loading feature allows to load faster and reduce the bandwidth consumption. (Pro version only)
+* Allows to select an image as a placeholder, to replace the real images during pre-loading. (Pro version only)
 
 **What is Lazy Loading?**
 
@@ -60,7 +60,7 @@ The setup options for the loading screen are:
 **Select foreground color**: Allows to select the color of the graphics and texts that display the loading progress information.
 **Display loading percent**: Shows the percentage of loading.
 
-**Lazy Loading Setup**
+**Lazy Loading Setup (in Pro version only)**
 
 The options to set up Lazy Loading are:
 
