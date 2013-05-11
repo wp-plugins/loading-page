@@ -1,10 +1,10 @@
 (function ($) {
     /*Browser detection patch*/
-    $.browser = {};
-    $.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
-    $.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
-    $.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
-    $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+    var browser = {};
+    browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+    browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+    browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+    browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
 	
     if (!Array.prototype.indexOf){
 	   Array.prototype.indexOf = function(elt /*, from*/){
@@ -151,7 +151,7 @@
             for (var i = 0; i < urls.length; i++) {
                 if (urls[i].length > 0 && images.indexOf(urls[i]) == -1) {
                     var extra = "";
-                    if ($.browser.msie && $.browser.version < 9) {
+                    if (browser.msie && browser.version < 9) {
                         extra = "?" + Math.floor(Math.random() * 3000);
                     }
                     images.push(urls[i] + extra);
