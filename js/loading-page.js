@@ -58,15 +58,20 @@
             backgroundColor: "#000",
             foregroundColor: "#fff",
             text: true,
-            deepSearch: true
+            deepSearch: true,
+            pageEffect: 'none'
         },
         
         options; // Default options extended with values passed as parameters
         
     
     // Methods used in loading page
+    lp.ApplyAnimationToElement = function(animName) {
+        $('body').addClass('lp-'+animName);
+    };
+    
     lp.onLoadComplete = function () {
-        lp.graphics[options.graphic].complete(function(){options.onComplete});
+        lp.graphics[options.graphic].complete(function(){ lp.ApplyAnimationToElement(options.pageEffect); options.onComplete; });
     };
     
     lp.afterEach = function () {

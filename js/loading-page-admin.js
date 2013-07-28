@@ -1,8 +1,8 @@
 ﻿(function($){
     // Main application
     window['send_to_editor_default'] = window.send_to_editor;
-    window['loading_page_selected_image'] = function(){
-        var img_field = $('input[name="lp_lazy_loading_image"]');
+    window['loading_page_selected_image'] = function(fieldName){
+        var img_field = $('input[name="'+fieldName+'"]');
         window.send_to_editor = function(html){
             var file_url = jQuery(html).attr('href');
             if (file_url) {

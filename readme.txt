@@ -1,4 +1,4 @@
-=== Loading Page ===
+=== Loading Page with Loading Screen ===
 Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
 Tags:page performance,performance,render time,wordpress performance,image,images,load,loading,lazy
@@ -8,11 +8,11 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Loading Page plugin performs a pre-loading of images on your website and displays a loading progress screen with percentage of completion. Once everything is loaded, the screen disappears.
+Loading Page with Loading Screen plugin performs a pre-loading of images on your website and displays a loading progress screen with percentage of completion. Once everything is loaded, the screen disappears.
 
 == Description ==
 
-Loading Page features:
+Loading Page with Loading Screen features:
 
 	→ Displays a screen showing loading percentage of a given page
 	→ Increase the WordPress performance
@@ -20,11 +20,11 @@ Loading Page features:
 	→ Allows to display or remove the text showing the loading percentage
 	→ Preload the page images
 
-**Loading Page** plugin performs a **pre-loading of images** on your website and displays a **loading progress screen** with percentage of completion. Once everything is loaded, the screen disappears.
+Loading Page with Loading Screen plugin performs a pre-loading of image on your website and displays a loading progress screen with percentage of completion. Once everything is loaded, the screen disappears.
 
 **More about the Main Features:**
 
-* Displays a screen showing loading percentage of a given page. In heavy pages the "Loading Page" plugin allows to know when the page appearance is ready.
+* Displays a screen showing loading percentage of a given page. In heavy pages the "Loading Page with Loading Screen" plugin allows to know when the page appearance is ready.
 * Allows to select the colors of the loading progress screen. By default the color of loading screen is black, but it may be modified to adjust the look and feel of the loading screen with website's design.
 * Allows to display or remove the text showing the loading percentage.
 
@@ -50,7 +50,7 @@ If you want more information about this plugin or another one don't doubt to vis
 
 == Installation ==
 
-**To install Loading Page, follow these steps:**
+**To install Loading Page with Loading Screen, follow these steps:**
 
 1. Download the zipped plugin.
 2. Go to the **Plugins** section on your Wordpress dashboard.
@@ -61,9 +61,9 @@ If you want more information about this plugin or another one don't doubt to vis
 
 == Interface ==
 
-To use **Loading Page** on your website, simply activate the plugin. If you wish to modify any of the default options, go to the plugin’s Settings. They can be found either by going to **Settings > Loading Page** on your Wordpress dashboard, or by going to Plugins; a link to Settings can be found in the plugin description.
+To use Loading Page with Loading Screen on your website, simply activate the plugin. If you wish to modify any of the default options, go to the plugin’s Settings. They can be found either by going to Settings > Loading Page on your Wordpress dashboard, or by going to Plugins; a link to Settings can be found in the plugin description.
 
-The **Loading Page** setup is divided in two sections: the first one is dedicated to the activation and  setup of the loading screen, and the second to the delayed loading of the images that are not shown immediately ( images that require on-page scrolling in order to be seen).
+The Loading Page with Loading Screen setup is divided in two sections: the first one is dedicated to the activation and  setup of the loading screen, and the second to the delayed loading of the images that are not shown immediately ( images that require on-page scrolling in order to be seen).
 
 **Loading Screen Setup**
 
