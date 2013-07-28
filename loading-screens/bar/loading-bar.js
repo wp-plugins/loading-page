@@ -10,16 +10,23 @@
             options.height          = options.height || 1;
             options.foregroundColor = options.foregroundColor || "#FFFFFF";
             
-            this.attr['overlay'] = $("<div></div>").css({
+            var css_o = {
                 width: "100%",
                 height: "100%",
                 backgroundColor: options.backgroundColor,
-                backgroundPosition: "fixed",
                 position: "fixed",
                 zIndex: 666999,
                 top: 0,
                 left: 0
-            }).appendTo("body");
+            };
+            
+            if( options[ 'backgroundImage' ] ){
+                css_o['backgroundImage']  = 'url('+options[ 'backgroundImage' ]+')';
+                css_o['background-repeat'] = options[ 'backgroundRepeat' ];
+                css_o['background-position'] = 'center center';
+            }
+            
+            this.attr['overlay'] = $("<div></div>").css(css_o).appendTo("body");
             
             this.attr['bar'] = $("<div></div>").css({
                 height: options.height+"px",
@@ -58,10 +65,10 @@
         },
         
         complete : function(callback){
+            callback();
             var me = this;
             this.attr['overlay'].fadeOut(500, function () {
                 me.attr['overlay'].remove();
-                callback();
             });
         }
     };

@@ -28,7 +28,8 @@ if(!function_exists('loading_page_install')){
             'backgroundColor'           => '#000000',
             'enabled_loading_screen'    => true,
             'loading_screen'            => 'bar',
-            'displayPercent'            => true
+            'displayPercent'            => true,
+            'pageEffect'                => 'none'
         );
         
         update_option('loading_page_options', $loading_page_options);
@@ -50,7 +51,7 @@ if(!function_exists('loading_page_init')){
                     add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts');
 
                     // Set the script code at wp_footer
-                    add_action('wp_footer', 'loading_page_footer');
+                    add_action('wp_head', 'loading_page_footer');
                 }
             }    
         }
@@ -104,17 +105,19 @@ if(!function_exists('loading_page_admin_resources')){
         if(strpos($hook, "loading-page") !== false){
             wp_enqueue_style( 'farbtastic' );
             wp_enqueue_script( 'farbtastic' );
-		    wp_enqueue_script('lp-admin-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page-admin.js', array('jquery', 'farbtastic'));
+		    wp_enqueue_style( 'thickbox' );
+            wp_enqueue_script( 'thickbox' );
+            
+            wp_enqueue_script('lp-admin-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page-admin.js', array('jquery', 'thickbox', 'farbtastic'));
         }
     } // End loading_page_admin_resources
 } 
 
 if(!function_exists('loading_page_enqueue_scripts')){
     function loading_page_enqueue_scripts(){
-        wp_enqueue_style('codepeople-loading-page-style', LOADING_PAGE_PLUGIN_URL.'/css/loading-page.css');
-        $required = array('jquery');
-        
         $op = get_option('loading_page_options');
+        wp_enqueue_style('codepeople-loading-page-style', LOADING_PAGE_PLUGIN_URL.'/css/loading-page'.(($op['pageEffect'] != 'none') ? '-'.$op['pageEffect'] : '').'.css');
+        $required = array('jquery');
         if($op['loading_screen']){
             $s = loading_page_get_screen($op['loading_screen']);
             if($s){
@@ -144,6 +147,9 @@ if(!function_exists('loading_page_footer')){
                             loadingScreen   : '.$op['enabled_loading_screen'].',
                             backgroundColor : "'.$op['backgroundColor'].'",
                             foregroundColor : "'.$op['foregroundColor'].'",
+                            backgroundImage : "'.$op['backgroundImage'].'",
+                            pageEffect      : "'.$op['pageEffect'].'",
+                            backgroundRepeat: "'.$op['backgroundImageRepeat'].'",
                             graphic         : "bar",
                             text            : '.$op['displayPercent'].'
                         });
@@ -161,9 +167,12 @@ if(!function_exists('loading_page_settings_page')){
             $loading_page_options = array(
                 'foregroundColor'           => (!empty($_POST['lp_foregroundColor'])) ? $_POST['lp_foregroundColor'] : '#FFFFFF',
                 'backgroundColor'           => (!empty($_POST['lp_backgroundColor'])) ? $_POST['lp_backgroundColor'] : '#000000',
+                'backgroundImage'           => $_POST['lp_backgroundImage'],
+                'backgroundImageRepeat'     => $_POST['lp_backgroundRepeat'],
                 'enabled_loading_screen'    => (isset($_POST['lp_enabled_loading_screen'])) ? true : false,
                 'loading_screen'            => 'bar',
                 'displayPercent'            => (isset($_POST['lp_displayPercent'])) ? true : false,
+                'pageEffect'                => $_POST['lp_pageEffect']
             );
             
             if(update_option('loading_page_options', $loading_page_options)){
@@ -210,8 +219,36 @@ if(!function_exists('loading_page_settings_page')){
                                 <td><input type="text" name="lp_backgroundColor" id="lp_backgroundColor" value="<?php print(esc_attr($loading_page_options['backgroundColor'])); ?>" /><div id="lp_backgroundColor_picker"></div></td>
                             </tr>
                             <tr>
+                                <th><?php _e('Select image as background', LOADING_PAGE_TD); ?></th>
+                                <td>
+                                    <input type="text" name="lp_backgroundImage" id="lp_backgroundImage" value="<?php print(esc_attr($loading_page_options['backgroundImage'])); ?>" />
+                                    <input type="button" value="Browse" onclick="loading_page_selected_image('lp_backgroundImage');" /> 
+                                    <select id="lp_backgroundRepeat" name="lp_backgroundRepeat">
+                                        <option value="repeat" <?php if( $loading_page_options[ 'backgroundImageRepeat' ] == 'repeat' ) echo "SELECTED"; ?> >Tile</option>
+                                        <option value="no-repeat" <?php if( $loading_page_options[ 'backgroundImageRepeat' ] == 'no-repeat' ) echo "SELECTED"; ?> >Center</option>
+                                    </select>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><?php _e('Select foreground color', LOADING_PAGE_TD); ?></th>
                                 <td><input type="text" name="lp_foregroundColor" id="lp_foregroundColor" value="<?php print(esc_attr($loading_page_options['foregroundColor'])); ?>" /><div id="lp_foregroundColor_picker"></div></td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Apply the effect on page', LOADING_PAGE_TD); ?></th>
+                                <td>
+                                <select name="lp_pageEffect">
+                                <?php
+                                    $pageEffects = array('none', 'rotateInLeft');
+                                    
+                                    foreach($pageEffects as $value){
+                                        print '<option value="'.$value.'" '.(($loading_page_options['pageEffect'] == $value) ? 'SELECTED' : '').'>'.$value.'</option>';
+                                    }
+                                ?>
+                                    
+                                </select>
+                                <div>The premium version of plugin add the following effects: collapseIn, risingFromBottom, expandIn, fadeIn, fallFromTop, rotateInLeft, rotateInRight, rotateInRightWithoutToKeyframe, slideInSkew, tumbleIn, whirlIn</div>
+                                </td>
                             </tr>
                             <tr>
                                 <th><?php _e('Display loading percent', LOADING_PAGE_TD); ?></th>
