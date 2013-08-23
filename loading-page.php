@@ -29,6 +29,8 @@ if(!function_exists('loading_page_install')){
             'enabled_loading_screen'    => true,
             'loading_screen'            => 'bar',
             'displayPercent'            => true,
+            'backgroundImage'           => '',
+            'backgroundImageRepeat'     => 'repeat',
             'pageEffect'                => 'none'
         );
         
