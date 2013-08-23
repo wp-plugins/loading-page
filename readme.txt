@@ -3,7 +3,7 @@ Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
 Tags:page performance,performance,render time,wordpress performance,image,images,load,loading,lazy
 Requires at least: 3.0.5
-Tested up to: 3.5.1
+Tested up to: 3.6
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
