@@ -146,14 +146,14 @@ if(!function_exists('loading_page_footer')){
                 if(jQuery){
                     jQuery(document).ready(function () {
                         jQuery("body").loadingpage({
-                            loadingScreen   : '.$op['enabled_loading_screen'].',
+                            loadingScreen   : '.((!empty($op['enabled_loading_screen'])) ? $op['enabled_loading_screen'] : 0).',
                             backgroundColor : "'.$op['backgroundColor'].'",
                             foregroundColor : "'.$op['foregroundColor'].'",
                             backgroundImage : "'.$op['backgroundImage'].'",
                             pageEffect      : "'.$op['pageEffect'].'",
                             backgroundRepeat: "'.$op['backgroundImageRepeat'].'",
                             graphic         : "bar",
-                            text            : '.$op['displayPercent'].'
+                            text            : '.((!empty($op['displayPercent'])) ? $op['displayPercent'] : 0).'
                         });
                     });
                 }
