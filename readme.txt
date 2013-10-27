@@ -1,7 +1,7 @@
 === Loading Page with Loading Screen ===
 Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
-Tags:page performance,performance,render time,wordpress performance,image,images,load,loading,lazy
+Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen
 Requires at least: 3.0.5
 Tested up to: 3.7
 Stable tag: 1.0.1
@@ -76,7 +76,7 @@ The setup options for the loading screen are:
 **Display loading screen only on homepage**: displays a loading screen only on homepage. 
 **Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
 **Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
-**Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centred.
+**Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
 **Select foreground color**: Allows to select the color of the graphics and texts that display the loading progress information.
 **Apply the effect on page**: Display the page's content with an animation after complete the loading process.
 **Display loading percent**: Shows the percentage of loading. The loading percent is calculated in function of images in the page.
@@ -100,13 +100,13 @@ A: Yes, that's possible. Go to the settings page of plugin and check the box "Di
 
 = Q: Might I display an image as loading screen background? =
 
-A: Yes, that's possible. Go to the settings page of plugin and select the image in the option "Select image as background". The image can be displayed tiled or centred.
+A: Yes, that's possible. Go to the settings page of plugin and select the image in the option "Select image as background". The image can be displayed tiled or centered.
 
-= Q: Are the loading screen supported by all browsers? =
+= Q: Are the loading screens supported by all browsers? =
 
 A: There are some loading screens that require of the canvas object, all modern browsers include the canvas object. The screens with special requirements display a caveat text when are selected.
 
-= Q: Why I can't see the animation effect after complete the loading screen? =
+= Q: Why can't I see the animation effect after complete the loading screen? =
 
 A: Please be sure you are using a browser with CSS3 support.
 
