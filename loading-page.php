@@ -146,7 +146,7 @@ if(!function_exists('loading_page_footer')){
                 if(jQuery){
                     jQuery(document).ready(function () {
                         jQuery("body").loadingpage({
-                            loadingScreen   : '.((!empty($op['enabled_loading_screen'])) ? $op['enabled_loading_screen'] : 0).',
+                            loadingScreen   : '.( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() ) ) ? 1 : 0).',
                             backgroundColor : "'.$op['backgroundColor'].'",
                             foregroundColor : "'.$op['foregroundColor'].'",
                             backgroundImage : "'.$op['backgroundImage'].'",
@@ -172,6 +172,7 @@ if(!function_exists('loading_page_settings_page')){
                 'backgroundImage'           => $_POST['lp_backgroundImage'],
                 'backgroundImageRepeat'     => $_POST['lp_backgroundRepeat'],
                 'enabled_loading_screen'    => (isset($_POST['lp_enabled_loading_screen'])) ? true : false,
+                'loading_screen_home_only'  => ( isset( $_POST[ 'lp_loading_screen_home_only' ] ) ) ? true : false,
                 'loading_screen'            => 'bar',
                 'displayPercent'            => (isset($_POST['lp_displayPercent'])) ? true : false,
                 'pageEffect'                => $_POST['lp_pageEffect']
@@ -203,6 +204,10 @@ if(!function_exists('loading_page_settings_page')){
                             <tr>
                                 <th><?php _e('Enable loading screen', LOADING_PAGE_TD); ?></th>
                                 <td><input type="checkbox" name="lp_enabled_loading_screen" <?php echo(($loading_page_options['enabled_loading_screen']) ? 'CHECKED' : '' ); ?> /></td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Display loading screen only on homepage', LOADING_PAGE_TD); ?></th>
+                                <td><input type="checkbox" name="lp_loading_screen_home_only" <?php echo(( isset( $loading_page_options['loading_screen_home_only'] ) && $loading_page_options['loading_screen_home_only']) ? 'CHECKED' : '' ); ?> /></td>
                             </tr>
                             <tr>
                                 <?php $loading_screens = loading_page_get_screen_list();?>    
