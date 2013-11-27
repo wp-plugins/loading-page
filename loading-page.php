@@ -51,9 +51,6 @@ if(!function_exists('loading_page_init')){
                 if($op['enabled_loading_screen']){
                     // Load the styles and script files
                     add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts');
-
-                    // Set the script code at wp_footer
-                    add_action('wp_head', 'loading_page_footer');
                 }
             }    
         }
@@ -135,31 +132,21 @@ if(!function_exists('loading_page_enqueue_scripts')){
         }
         
         wp_enqueue_script('codepeople-loading-page-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page.js', $required);
-    } // End loading_page_enqueue_scripts
-}
-
-if(!function_exists('loading_page_footer')){
-    function loading_page_footer($footer){
-        $op = get_option('loading_page_options');
-        if($op['enabled_loading_screen'] || $op['enabled_lazy_loading']){
-            print '<script>
-                if(jQuery){
-                    jQuery(document).ready(function () {
-                        jQuery("body").loadingpage({
-                            loadingScreen   : '.( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() ) ) ? 1 : 0).',
-                            backgroundColor : "'.$op['backgroundColor'].'",
-                            foregroundColor : "'.$op['foregroundColor'].'",
-                            backgroundImage : "'.$op['backgroundImage'].'",
-                            pageEffect      : "'.$op['pageEffect'].'",
-                            backgroundRepeat: "'.$op['backgroundImageRepeat'].'",
-                            graphic         : "bar",
-                            text            : '.((!empty($op['displayPercent'])) ? $op['displayPercent'] : 0).'
-                        });
-                    });
-                }
-            </script>';
-        }    
-    } // End loading_page_footer
+		if($op['enabled_loading_screen'] || $op['enabled_lazy_loading']){
+			$loading_page_settings = array(
+				'loadingScreen'   => ( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() ) ) ? 1 : 0),
+                'backgroundColor' => $op['backgroundColor'],
+                'foregroundColor' => $op['foregroundColor'],
+                'backgroundImage' => $op['backgroundImage'],
+                'pageEffect'      => $op['pageEffect'],
+                'backgroundRepeat'=> $op['backgroundImageRepeat'],
+                'graphic'         => $op['loading_screen'],
+                'text'            => ((!empty($op['displayPercent'])) ? $op['displayPercent'] : 0)
+			);
+			
+			wp_localize_script('codepeople-loading-page-script', 'loading_page_settings', $loading_page_settings );
+		}
+	} // End loading_page_enqueue_scripts
 }
 
 if(!function_exists('loading_page_settings_page')){

@@ -112,5 +112,6 @@ A: Please be sure you are using a browser with CSS3 support.
 
 == Screenshots ==
 1. Loading Page Preview
-2. Benefits to use Lazy Load
-3. Plugin Settings
+2. Loading Screen Available
+3. Benefits to use Lazy Load
+4. Plugin Settings
