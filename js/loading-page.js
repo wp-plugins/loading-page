@@ -130,7 +130,6 @@
     };
 
     lp.createOverlayLoader = function () {
-        lp.graphics[options.graphic].create(options);    
         if ( !images.length) {
         	lp.destroyLoader()
         }
@@ -187,5 +186,26 @@
         }    
         return this;
     };
-
+	
+	if( typeof loading_page_settings != 'undefined' ){
+		// Check for body existence and insert the loading screen if enabled
+		window[ 'loading_page_available_body' ] = function(){
+			var b = jQuery("body");
+			if( b.length ){
+				var options = $.extend(
+					default_options, loading_page_settings || {}
+				);
+				if(options['loadingScreen'])
+					lp.graphics[options.graphic].create(options);
+			}else
+				setTimeout( function(){ loading_page_available_body(); }, 50 );
+		}	
+		
+		loading_page_available_body( loading_page_settings );
+		
+		// Define the on-load event handle
+		jQuery(document).ready(function () {
+			jQuery("body").loadingpage( loading_page_settings );
+		});
+	}
 })(jQuery);
