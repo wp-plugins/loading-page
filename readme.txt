@@ -3,7 +3,7 @@ Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
 Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen
 Requires at least: 3.0.5
-Tested up to: 3.7
+Tested up to: 3.8
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,13 @@ The base plugin, available for free from the WordPress Plugin Directory, has all
 * Improves the page performance.
 * Lazy Loading feature allows to load faster and reduce the bandwidth consumption. The images are big consumers of bandwidth and loading time, so a WordPress website with multiple images can improve its performance and reduce the loading time with the lazy loading feature. 
 * Allows to select an image as a placeholder, to replace the real images during pre-loading. It's recommended to select the lighter images possible to increase the WordPress performance, the image selected will be used in place of images that are not loaded in the first viewport.
+
+**Demo of Premium Version of Plugin**
+
+[http://www.dreamweaverdownloads.com/demos/corner-ad/wp-login.php](http://www.dreamweaverdownloads.com/demos/loading-page/wp-login.php "Click to access the Administration Area demo")
+
+[http://www.dreamweaverdownloads.com/demos/corner-ad/](http://www.dreamweaverdownloads.com/demos/loading-page/ "Click to access the Public Page")
+
 
 
 **What is Lazy Loading?**
