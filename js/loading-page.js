@@ -191,14 +191,27 @@
 		// Check for body existence and insert the loading screen if enabled
 		window[ 'loading_page_available_body' ] = function(){
 			var b = jQuery("body");
-			if( b.length ){
+			if( b.length )
+			{
 				var options = $.extend(
 					default_options, loading_page_settings || {}
 				);
-				if(options['loadingScreen'])
-					lp.graphics[options.graphic].create(options);
-			}else
+				if( options['loadingScreen'] )
+				{
+					if( ( typeof lp.graphics != 'undefined' ) && ( typeof lp.graphics[options.graphic] != 'undefined' ) )
+					{
+						lp.graphics[options.graphic].create(options);
+					}
+					else
+					{
+						setTimeout( function(){ loading_page_available_body(); }, 50 );
+					}	
+				}	
+			}
+			else
+			{
 				setTimeout( function(){ loading_page_available_body(); }, 50 );
+			}	
 		}	
 		
 		loading_page_available_body( loading_page_settings );
