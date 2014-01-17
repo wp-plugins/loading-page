@@ -90,15 +90,22 @@
             height: 0,
             overflow: "hidden"
         });
-        
-        for (var i = 0; images.length > i; i++) {
+        imageCounter = images.length;
+        for (var i = 0; imageCounter > i; i++) {
             $.ajax({
                 url: images[i],
                 type: 'HEAD',
+				timeout: 5000,
                 complete: function(data) {
-                    if(!destroyed && data.status==200){
-                        imageCounter++;
-                        lp.addImageForPreload(this['url']);
+                    if(!destroyed){
+						if( data.status==200 )
+						{
+							lp.addImageForPreload(this['url']);
+						}
+						else
+						{
+							lp.completeImageLoading();
+						}
                     }
                 }
             });
@@ -107,14 +114,13 @@
     };
     
     lp.addImageForPreload = function(url) {
-        var image = $("<img />").attr("src", url).bind("load", function () {
+		var image = $("<img />").attr("src", url).bind("load", function () {
             lp.completeImageLoading();
         }).appendTo(imageContainer);
     };
 
     lp.completeImageLoading = function () {
         done++;
-
         var percentage = (done / imageCounter) * 100;
         lp.graphics[options.graphic].set(percentage);
         
@@ -172,7 +178,7 @@
         );
         
         // loading page
-        if(options['loadingScreen']){
+        if(options['loadingScreen']*1){
             this.each(function() {
                 lp.findImageInElement(this);
                 if (options.deepSearch == true) {
@@ -196,7 +202,7 @@
 				var options = $.extend(
 					default_options, loading_page_settings || {}
 				);
-				if( options['loadingScreen'] )
+				if( options['loadingScreen']*1 )
 				{
 					if( ( typeof lp.graphics != 'undefined' ) && ( typeof lp.graphics[options.graphic] != 'undefined' ) )
 					{
