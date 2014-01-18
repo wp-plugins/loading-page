@@ -28,6 +28,7 @@ if(!function_exists('loading_page_install')){
             'backgroundColor'           => '#000000',
             'enabled_loading_screen'    => true,
             'loading_screen'            => 'bar',
+            'loading_screen_home_only'  => true,
             'displayPercent'            => true,
             'backgroundImage'           => '',
             'backgroundImageRepeat'     => 'repeat',
@@ -134,7 +135,7 @@ if(!function_exists('loading_page_enqueue_scripts')){
         wp_enqueue_script('codepeople-loading-page-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page.js', $required);
 		if($op['enabled_loading_screen'] || $op['enabled_lazy_loading']){
 			$loading_page_settings = array(
-				'loadingScreen'   => ( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() ) ) ? 1 : 0),
+				'loadingScreen'   => ( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() || is_front_page() ) ) ? 1 : 0),
                 'backgroundColor' => $op['backgroundColor'],
                 'foregroundColor' => $op['foregroundColor'],
                 'backgroundImage' => $op['backgroundImage'],
