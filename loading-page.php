@@ -182,7 +182,7 @@ if(!function_exists('loading_page_settings_page')){
                 <div class="postbox" style="min-width:760px;">
                     <h3 class='hndle' style="padding:5px;"><span><?php _e('Loading Screen', LOADING_PAGE_TD); ?></span></h3>
                     <div class="inside">
-                        <p  style="border:1px solid #E6DB55;margin-bottom:10px;padding:5px;background-color: #FFFFE0;">If you want test the premium version of Loading Page go to the following links:<br/> <a href="http://www.dreamweaverdownloads.com/demos/loading-page/wp-login.php" target="_blank">Administration area: Click to access the administration area demo</a><br/> <a href="http://www.dreamweaverdownloads.com/demos/loading-page/" target="_blank">Public page: Click to access the Loading Page</a>
+                        <p  style="border:1px solid #E6DB55;margin-bottom:10px;padding:5px;background-color: #FFFFE0;">If you want test the premium version of Loading Page go to the following links:<br/> <a href="http://demos.net-factor.com/loading-page/wp-login.php" target="_blank">Administration area: Click to access the administration area demo</a><br/> <a href="http://demos.net-factor.com/loading-page/" target="_blank">Public page: Click to access the Loading Page</a>
 						</p>
                         <p><?php
                             print(
