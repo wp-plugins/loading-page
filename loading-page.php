@@ -103,6 +103,7 @@ if(!function_exists('loading_page_settings_menu')){
 if(!function_exists('loading_page_admin_resources')){
     function loading_page_admin_resources($hook){
         if(strpos($hook, "loading-page") !== false){
+			wp_enqueue_media();
             wp_enqueue_style( 'farbtastic' );
             wp_enqueue_script( 'farbtastic' );
 		    wp_enqueue_style( 'thickbox' );

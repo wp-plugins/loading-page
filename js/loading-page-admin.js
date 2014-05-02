@@ -1,19 +1,26 @@
 ﻿(function($){
     // Main application
-    window['send_to_editor_default'] = window.send_to_editor;
     window['loading_page_selected_image'] = function(fieldName){
         var img_field = $('input[name="'+fieldName+'"]');
-        window.send_to_editor = function(html){
-            var file_url = jQuery(html).attr('href');
-            if (file_url) {
-                img_field.val(file_url);
-            }
-            tb_remove();
-            window.send_to_editor = window.send_to_editor_default;
-        };
-
-        tb_show('', 'media-upload.php?TB_iframe=true');
-        return false;
+        var media = wp.media({
+				title: 'Select Media File',
+				library:{
+					type: 'image'
+				},
+				button: {
+				text: 'Select Item'
+				},
+				multiple: false
+		}).on('select', 
+			(function( field ){
+				return function() {
+					var attachment = media.state().get('selection').first().toJSON();
+					var url = attachment.url;
+					field.val( url );
+				};
+			})( img_field )	
+		).open();
+		return false;
     };
     
     window['loading_page_display_screen_tips'] = function(e){
