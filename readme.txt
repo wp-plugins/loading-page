@@ -80,7 +80,7 @@ The Loading Page with Loading Screen setup is divided in two sections: the first
 The setup options for the loading screen are:  
 
 **Enable loading screen**: activates preloading of images and displays a loading screen while the webpage is loading. 
-**Display loading screen only on homepage**: displays a loading screen only on homepage. 
+**Display loading screen only in**: displays a loading screen only on homepage, all pages, or specific pages or posts. In the last case the IDs of pages or posts should be separated by comma symbol "," 
 **Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
 **Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
 **Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
@@ -103,7 +103,11 @@ A: The lazy loading doesn't load the website images until images be in the viewp
 
 = Q: Could I display the loading screen on homepage only? =
 
-A: Yes, that's possible. Go to the settings page of plugin and check the box "Display loading screen only on homepage".
+A: Yes, that's possible. Go to the settings page of plugin and check the option "homepage only".
+
+= Q: Is possible display the loading screen in some pages only? =
+
+A: Yes, that's possible. Go to the settings page of plugin and check the option "the specific pages", and enter the posts or pages IDs, separated by the comma symbol ",".
 
 = Q: Might I display an image as loading screen background? =
 
