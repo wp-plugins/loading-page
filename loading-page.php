@@ -28,7 +28,8 @@ if(!function_exists('loading_page_install')){
             'backgroundColor'           => '#000000',
             'enabled_loading_screen'    => true,
             'loading_screen'            => 'bar',
-            'loading_screen_home_only'  => true,
+            'lp_loading_screen_display_in'  => 'all',
+			'lp_loading_screen_display_in_pages' => '',
             'displayPercent'            => true,
             'backgroundImage'           => '',
             'backgroundImageRepeat'     => 'repeat',
@@ -116,6 +117,8 @@ if(!function_exists('loading_page_admin_resources')){
 
 if(!function_exists('loading_page_enqueue_scripts')){
     function loading_page_enqueue_scripts(){
+		global $post;
+		
         $op = get_option('loading_page_options');
         wp_enqueue_style('codepeople-loading-page-style', LOADING_PAGE_PLUGIN_URL.'/css/loading-page'.(($op['pageEffect'] != 'none') ? '-'.$op['pageEffect'] : '').'.css');
         $required = array('jquery');
@@ -135,8 +138,26 @@ if(!function_exists('loading_page_enqueue_scripts')){
         
         wp_enqueue_script('codepeople-loading-page-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page.js', $required);
 		if($op['enabled_loading_screen'] || $op['enabled_lazy_loading']){
+			$loadingScreen = 0;
+			if( !empty( $op['enabled_loading_screen'] ) )
+			{
+				$pages = ( !empty( $op[ 'lp_loading_screen_display_in_pages' ] ) ) ? $op[ 'lp_loading_screen_display_in_pages' ] : '';
+				$pages = str_replace( ' ', '', $pages );
+				$pages = explode( ',', $pages );
+				
+				if(
+					empty( $op[ 'lp_loading_screen_display_in' ] ) ||
+					$op[ 'lp_loading_screen_display_in' ] == 'all' ||
+					( $op[ 'lp_loading_screen_display_in' ] == 'home' && ( is_home() || is_front_page() ) ) ||
+					( $op[ 'lp_loading_screen_display_in' ] == 'pages' && isset( $post ) && in_array( $post->ID, $pages )  )
+				)
+				{
+					$loadingScreen = 1;
+				}
+			}
+			
 			$loading_page_settings = array(
-				'loadingScreen'   => ( ( !empty( $op['enabled_loading_screen'] ) && ( empty( $op[ 'loading_screen_home_only' ] ) || is_home() || is_front_page() ) ) ? 1 : 0),
+				'loadingScreen'   => $loadingScreen,
                 'backgroundColor' => $op['backgroundColor'],
                 'foregroundColor' => $op['foregroundColor'],
                 'backgroundImage' => $op['backgroundImage'],
@@ -161,7 +182,8 @@ if(!function_exists('loading_page_settings_page')){
                 'backgroundImage'           => $_POST['lp_backgroundImage'],
                 'backgroundImageRepeat'     => $_POST['lp_backgroundRepeat'],
                 'enabled_loading_screen'    => (isset($_POST['lp_enabled_loading_screen'])) ? true : false,
-                'loading_screen_home_only'  => ( isset( $_POST[ 'lp_loading_screen_home_only' ] ) ) ? true : false,
+                'lp_loading_screen_display_in'  	 => ( isset( $_POST[ 'lp_loading_screen_display_in' ] ) ) ? $_POST[ 'lp_loading_screen_display_in' ] : 'all',
+				'lp_loading_screen_display_in_pages' => $_POST[ 'lp_loading_screen_display_in_pages' ],
                 'loading_screen'            => 'bar',
                 'displayPercent'            => (isset($_POST['lp_displayPercent'])) ? true : false,
                 'pageEffect'                => $_POST['lp_pageEffect']
@@ -197,8 +219,14 @@ if(!function_exists('loading_page_settings_page')){
                                 <td><input type="checkbox" name="lp_enabled_loading_screen" <?php echo(($loading_page_options['enabled_loading_screen']) ? 'CHECKED' : '' ); ?> /></td>
                             </tr>
                             <tr>
-                                <th><?php _e('Display loading screen only on homepage', LOADING_PAGE_TD); ?></th>
-                                <td><input type="checkbox" name="lp_loading_screen_home_only" <?php echo(( isset( $loading_page_options['loading_screen_home_only'] ) && $loading_page_options['loading_screen_home_only']) ? 'CHECKED' : '' ); ?> /></td>
+                                <th><?php _e('Display loading screen in', LOADING_PAGE_TD); ?></th>
+                                <td>
+									<div><input type="radio" name="lp_loading_screen_display_in" value="home" <?php echo(( isset( $loading_page_options['lp_loading_screen_display_in'] ) && $loading_page_options['lp_loading_screen_display_in'] == 'home' ) ? 'CHECKED' : '' ); ?> /> homepage only</div>
+									<div><input type="radio" name="lp_loading_screen_display_in" value="all" <?php echo(( isset( $loading_page_options['lp_loading_screen_display_in'] ) && $loading_page_options['lp_loading_screen_display_in'] == 'all' ) ? 'CHECKED' : '' ); ?> /> all pages</div>
+									<div><input type="radio" name="lp_loading_screen_display_in" value="pages" <?php echo(( isset( $loading_page_options['lp_loading_screen_display_in'] ) && $loading_page_options['lp_loading_screen_display_in'] == 'pages' ) ? 'CHECKED' : '' ); ?> /> the specific pages 
+									<input type="text" name="lp_loading_screen_display_in_pages" value="<?php if( !empty( $loading_page_options['lp_loading_screen_display_in_pages'] ) ) print $loading_page_options['lp_loading_screen_display_in_pages']; ?>"> <span>In this case should be typed one, or more IDs for posts or pages, separated by the comma symbol ","</span></div>
+									
+								</td>
                             </tr>
                             <tr>
                                 <?php $loading_screens = loading_page_get_screen_list();?>    
