@@ -52,7 +52,7 @@ if(!function_exists('loading_page_init')){
             if($op){
                 if($op['enabled_loading_screen']){
                     // Load the styles and script files
-                    add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts');
+                    add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts', 1);
                 }
             }    
         }

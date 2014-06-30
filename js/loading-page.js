@@ -210,13 +210,13 @@
 					}
 					else
 					{
-						setTimeout( function(){ loading_page_available_body(); }, 50 );
+						setTimeout( function(){ loading_page_available_body(); }, 30 );
 					}	
 				}	
 			}
 			else
 			{
-				setTimeout( function(){ loading_page_available_body(); }, 50 );
+				setTimeout( function(){ loading_page_available_body(); }, 30 );
 			}	
 		}	
 		
