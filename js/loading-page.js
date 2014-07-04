@@ -57,7 +57,7 @@
             onComplete: function () {}, // callback for loading page complete
             backgroundColor: "#000",
             foregroundColor: "#fff",
-            text: true,
+            text: 1,
             deepSearch: true,
             pageEffect: 'none'
         },
@@ -202,6 +202,9 @@
 				var options = $.extend(
 					default_options, loading_page_settings || {}
 				);
+                
+                options[ 'text' ] *= 1;
+                
 				if( options['loadingScreen']*1 )
 				{
 					if( ( typeof lp.graphics != 'undefined' ) && ( typeof lp.graphics[options.graphic] != 'undefined' ) )
