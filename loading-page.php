@@ -50,7 +50,8 @@ if(!function_exists('loading_page_init')){
         if(!is_admin()){
             $op = get_option('loading_page_options');
             if($op){
-                if($op['enabled_loading_screen']){
+                if( loading_page_loading_screen() ){
+                    add_action( 'wp_head',  'loading_page_replace_the_header', 99 );
                     // Load the styles and script files
                     add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts', 1);
                 }
@@ -101,6 +102,12 @@ if(!function_exists('loading_page_settings_menu')){
     } // End loading_page_settings_menu
 }
 
+if(!function_exists('loading_page_replace_the_header')){
+    function loading_page_replace_the_header($the_header){
+        echo '<style>body{visibility:hidden;}</style>';
+    }
+}
+
 if(!function_exists('loading_page_admin_resources')){
     function loading_page_admin_resources($hook){
         if(strpos($hook, "loading-page") !== false){
@@ -115,6 +122,31 @@ if(!function_exists('loading_page_admin_resources')){
     } // End loading_page_admin_resources
 } 
 
+if( !function_exists('loading_page_loading_screen') ){
+    function loading_page_loading_screen(){
+        global $post;
+        $op = get_option('loading_page_options');
+        $loadingScreen = 0;
+        if( !empty( $op['enabled_loading_screen'] ) )
+        {
+            $pages = ( !empty( $op[ 'lp_loading_screen_display_in_pages' ] ) ) ? $op[ 'lp_loading_screen_display_in_pages' ] : '';
+            $pages = str_replace( ' ', '', $pages );
+            $pages = explode( ',', $pages );
+            
+            if(
+                empty( $op[ 'lp_loading_screen_display_in' ] ) ||
+                $op[ 'lp_loading_screen_display_in' ] == 'all' ||
+                ( $op[ 'lp_loading_screen_display_in' ] == 'home' && ( is_home() || is_front_page() ) ) ||
+                ( $op[ 'lp_loading_screen_display_in' ] == 'pages' && isset( $post ) && in_array( $post->ID, $pages )  )
+            )
+            {
+                $loadingScreen = 1;
+            }
+        }
+        return $loadingScreen;
+    }
+}
+
 if(!function_exists('loading_page_enqueue_scripts')){
     function loading_page_enqueue_scripts(){
 		global $post;
@@ -122,7 +154,10 @@ if(!function_exists('loading_page_enqueue_scripts')){
         $op = get_option('loading_page_options');
         wp_enqueue_style('codepeople-loading-page-style', LOADING_PAGE_PLUGIN_URL.'/css/loading-page'.(($op['pageEffect'] != 'none') ? '-'.$op['pageEffect'] : '').'.css');
         $required = array('jquery');
-        if($op['loading_screen']){
+        
+        $loadingScreen = loading_page_loading_screen();
+        
+        if( $loadingScreen ){
             $s = loading_page_get_screen($op['loading_screen']);
             if($s){
                 if(!empty($s['style'])){
@@ -134,29 +169,9 @@ if(!function_exists('loading_page_enqueue_scripts')){
                     $required[] = 'codepeople-loading-page-script-'.$s['id'];
                 }
             }    
-        }
-        
-        wp_enqueue_script('codepeople-loading-page-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page.js', $required);
-		if($op['enabled_loading_screen'] || $op['enabled_lazy_loading']){
-			$loadingScreen = 0;
-			if( !empty( $op['enabled_loading_screen'] ) )
-			{
-				$pages = ( !empty( $op[ 'lp_loading_screen_display_in_pages' ] ) ) ? $op[ 'lp_loading_screen_display_in_pages' ] : '';
-				$pages = str_replace( ' ', '', $pages );
-				$pages = explode( ',', $pages );
-				
-				if(
-					empty( $op[ 'lp_loading_screen_display_in' ] ) ||
-					$op[ 'lp_loading_screen_display_in' ] == 'all' ||
-					( $op[ 'lp_loading_screen_display_in' ] == 'home' && ( is_home() || is_front_page() ) ) ||
-					( $op[ 'lp_loading_screen_display_in' ] == 'pages' && isset( $post ) && in_array( $post->ID, $pages )  )
-				)
-				{
-					$loadingScreen = 1;
-				}
-			}
-			
-			$loading_page_settings = array(
+            wp_enqueue_script('codepeople-loading-page-script', LOADING_PAGE_PLUGIN_URL.'/js/loading-page.js', $required);
+            
+            $loading_page_settings = array(
 				'loadingScreen'   => $loadingScreen,
                 'backgroundColor' => $op['backgroundColor'],
                 'foregroundColor' => $op['foregroundColor'],
@@ -168,8 +183,8 @@ if(!function_exists('loading_page_enqueue_scripts')){
 			);
 			
 			wp_localize_script('codepeople-loading-page-script', 'loading_page_settings', $loading_page_settings );
-		}
-	} // End loading_page_enqueue_scripts
+        }
+    } // End loading_page_enqueue_scripts
 }
 
 if(!function_exists('loading_page_settings_page')){
