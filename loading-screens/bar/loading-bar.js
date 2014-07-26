@@ -4,6 +4,7 @@
     $.loadingpage.graphics = $.loadingpage.graphics || {};
 
     $.loadingpage.graphics['bar'] = {
+        created: false,
         attr   : {},
         create : function(options){
             options.backgroundColor = options.backgroundColor || "#000000";
@@ -51,6 +52,8 @@
                     color: options.foregroundColor
                 }).appendTo(this.attr['overlay']);
             }
+            
+            this.created = true;
         },
         
         set : function(percentage){

@@ -66,12 +66,19 @@
         
     
     // Methods used in loading page
+    lp.graphicAction = function( action, params ){
+        if( typeof lp.graphics != 'undefined' && typeof lp.graphics[options.graphic] != 'undefined' && lp.graphics[options.graphic].created )
+        {
+            lp.graphics[ options.graphic ][ action ]( params );
+        }
+    };
+
     lp.ApplyAnimationToElement = function(animName) {
         $('body').addClass('lp-'+animName);
     };
     
     lp.onLoadComplete = function () {
-        lp.graphics[options.graphic].complete(function(){ lp.ApplyAnimationToElement(options.pageEffect); options.onComplete; });
+        lp.graphicAction( 'complete', function(){ lp.ApplyAnimationToElement(options.pageEffect); options.onComplete; } );
     };
     
     lp.afterEach = function () {
@@ -90,12 +97,18 @@
             height: 0,
             overflow: "hidden"
         });
+        var d = document.domain;
         imageCounter = images.length;
         for (var i = 0; imageCounter > i; i++) {
+            if( images[i].indexOf( d ) == -1 )
+            {
+                lp.completeImageLoading();
+                continue;
+            }            
             $.ajax({
                 url: images[i],
                 type: 'HEAD',
-				timeout: 5000,
+				timeout: 3000,
                 complete: function(data) {
                     if(!destroyed){
 						if( data.status==200 )
@@ -122,7 +135,7 @@
     lp.completeImageLoading = function () {
         done++;
         var percentage = (done / imageCounter) * 100;
-        lp.graphics[options.graphic].set(percentage);
+        lp.graphicAction( 'set', percentage );
         
         if (done == imageCounter) {
             lp.destroyLoader();
@@ -210,6 +223,7 @@
 					if( ( typeof lp.graphics != 'undefined' ) && ( typeof lp.graphics[options.graphic] != 'undefined' ) )
 					{
 						lp.graphics[options.graphic].create(options);
+                        b.css( 'visibility', 'visible' );
 					}
 					else
 					{
