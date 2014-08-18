@@ -50,11 +50,8 @@ if(!function_exists('loading_page_init')){
         if(!is_admin()){
             $op = get_option('loading_page_options');
             if($op){
-                if( loading_page_loading_screen() ){
-                    add_action( 'wp_head',  'loading_page_replace_the_header', 99 );
-                    // Load the styles and script files
-                    add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts', 1);
-                }
+                add_action( 'wp_head',  'loading_page_replace_the_header', 99 );
+                add_action('wp_enqueue_scripts', 'loading_page_enqueue_scripts', 1);
             }    
         }
     } // End loading_page_init
@@ -104,7 +101,10 @@ if(!function_exists('loading_page_settings_menu')){
 
 if(!function_exists('loading_page_replace_the_header')){
     function loading_page_replace_the_header($the_header){
-        echo '<style>body{visibility:hidden;}</style>';
+        if( loading_page_loading_screen() )
+        {
+            echo '<style>body{visibility:hidden;}</style>';
+        }
     }
 }
 
