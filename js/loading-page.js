@@ -158,7 +158,8 @@
         var url = "";
 
         if ($(element).css("background-image") != "none") {
-            var url = $(element).css("background-image");
+            var backImg = $(element).css("background-image");
+            if( /\.(png|gif|jpg|jpeg|bmp)/i.test(backImg)) url = backImg;
         } else if (typeof($(element).attr("src")) != "undefined" && element.nodeName.toLowerCase() == "img") {
             var url = $(element).attr("src");
         }
