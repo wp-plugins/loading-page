@@ -1,7 +1,7 @@
 === Loading Page with Loading Screen ===
 Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
-Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect
+Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect,posts,Post,admin,plugin
 Requires at least: 3.0.5
 Tested up to: 4.0
 Stable tag: 1.0.1
@@ -111,7 +111,7 @@ A: Yes, that's possible. Go to the settings page of plugin and check the option 
 
 = Q: Might I display an image as loading screen background? =
 
-A: Yes, that's possible. Go to the settings page of plugin and select the image in the option "Select image as background". The image can be displayed tiled or centered.
+A: Yes, that's possible. Go to the settings page of plugin and select the image in the option "Select image as background". The image can be displayed tiled or centred.
 
 = Q: Are the loading screens supported by all browsers? =
 
@@ -126,3 +126,21 @@ A: Please be sure you are using a browser with CSS3 support.
 2. Loading Screen Available
 3. Benefits to use Lazy Load
 4. Plugin Settings
+
+== Changelog ==
+
+= 1.0 =
+
+* First version released.
+
+= 1.0.1 =
+
+* Improves the plugin documentation.
+* Performs a pre-loading of the images on your website, and displays a loading progress screen with percentage of completion.
+* Allows to display an image as background of the loading screen.
+* Associates effects to the page loaded.
+* Allows to display the loading screen only on homepage, all pages, or particular pages of website.
+* Corrects an issue with the resources loaded in Internet Explorer.
+* Reduces the interval of time to display the loading screen.
+* Corrects an issue with the percentage text in the loading screen.
+* Excludes some files from the loading process.
