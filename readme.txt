@@ -1,7 +1,7 @@
 === Loading Page with Loading Screen ===
 Contributors: codepeople
 Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
-Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect,posts,Post,admin,plugin
+Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect,posts,Post,admin,plugin,fullscreen
 Requires at least: 3.0.5
 Tested up to: 4.0
 Stable tag: 1.0.1
