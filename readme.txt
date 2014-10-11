@@ -79,22 +79,22 @@ The Loading Page with Loading Screen setup is divided in two sections: the first
 
 The setup options for the loading screen are:  
 
-**Enable loading screen**: activates preloading of images and displays a loading screen while the webpage is loading. 
-**Display loading screen only in**: displays a loading screen only on homepage, all pages, or specific pages or posts. In the last case the IDs of pages or posts should be separated by comma symbol "," 
-**Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
-**Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
-**Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
-**Display image in fullscreen**: allows to adjust the background image in fullscreen mode.
-**Select foreground color**: Allows to select the color of the graphics and texts that display the loading progress information.
-**Apply the effect on page**: Display the page's content with an animation after complete the loading process.
-**Display loading percent**: Shows the percentage of loading. The loading percent is calculated in function of images in the page.
+* **Enable loading screen**: activates preloading of images and displays a loading screen while the webpage is loading. 
+* **Display loading screen only in**: displays a loading screen only on homepage, all pages, or specific pages or posts. In the last case the IDs of pages or posts should be separated by comma symbol "," 
+* **Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
+* **Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
+* **Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
+* **Display image in fullscreen**: allows to adjust the background image in fullscreen mode.
+* **Select foreground color**: Allows to select the color of the graphics and texts that display the loading progress information.
+* **Apply the effect on page**: Display the page's content with an animation after complete the loading process.
+* **Display loading percent**: Shows the percentage of loading. The loading percent is calculated in function of images in the page.
 
 **Lazy Loading Setup (in premium version only)**
 
 The options to set up Lazy Loading and increase the WordPress performance are:
 
-**Enable lazy loading**: Enables the delayed loading of images outside of the current viewing area of the user improving the rendering time of complete page.
-**Select the image to load by default**: Choose an image to be shown as a placeholder of the actual images, the loading of which will be delayed. It's recommended the selection of a light image to increase the WordPress performance.
+* **Enable lazy loading**: Enables the delayed loading of images outside of the current viewing area of the user improving the rendering time of complete page.
+* **Select the image to load by default**: Choose an image to be shown as a placeholder of the actual images, the loading of which will be delayed. It's recommended the selection of a light image to increase the WordPress performance.
 
 == Frequently Asked Questions ==
 
