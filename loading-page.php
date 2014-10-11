@@ -33,6 +33,7 @@ if(!function_exists('loading_page_install')){
             'displayPercent'            => true,
             'backgroundImage'           => '',
             'backgroundImageRepeat'     => 'repeat',
+            'fullscreen'                => 0,
             'pageEffect'                => 'none'
         );
         
@@ -178,6 +179,7 @@ if(!function_exists('loading_page_enqueue_scripts')){
                 'backgroundImage' => $op['backgroundImage'],
                 'pageEffect'      => $op['pageEffect'],
                 'backgroundRepeat'=> $op['backgroundImageRepeat'],
+                'fullscreen'      => ( ( !empty( $op[ 'fullscreen' ] ) ) ? 1 : 0 ),
                 'graphic'         => $op['loading_screen'],
                 'text'            => ((!empty($op['displayPercent'])) ? $op['displayPercent'] : 0)
 			);
@@ -196,6 +198,7 @@ if(!function_exists('loading_page_settings_page')){
                 'backgroundColor'           => (!empty($_POST['lp_backgroundColor'])) ? $_POST['lp_backgroundColor'] : '#000000',
                 'backgroundImage'           => $_POST['lp_backgroundImage'],
                 'backgroundImageRepeat'     => $_POST['lp_backgroundRepeat'],
+                'fullscreen'                => ( isset( $_POST['lp_fullscreen'] ) ) ? 1 : 0,
                 'enabled_loading_screen'    => (isset($_POST['lp_enabled_loading_screen'])) ? true : false,
                 'lp_loading_screen_display_in'  	 => ( isset( $_POST[ 'lp_loading_screen_display_in' ] ) ) ? $_POST[ 'lp_loading_screen_display_in' ] : 'all',
 				'lp_loading_screen_display_in_pages' => $_POST[ 'lp_loading_screen_display_in_pages' ],
@@ -269,6 +272,13 @@ if(!function_exists('loading_page_settings_page')){
                                         <option value="no-repeat" <?php if( $loading_page_options[ 'backgroundImageRepeat' ] == 'no-repeat' ) echo "SELECTED"; ?> >Center</option>
                                     </select>
                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><?php _e('Display image in fullscreen', LOADING_PAGE_TD); ?></th>
+                                <td>
+                                    <input type="checkbox" name="lp_fullscreen" id="lp_fullscreen" <?php echo (( isset( $loading_page_options[ 'fullscreen' ] ) && $loading_page_options[ 'fullscreen' ] )   ? 'CHECKED' : '' );?> />
+                                    <?php _e('(The fullscreen attribute can fail in some browsers)', LOADING_PAGE_TD); ?>
                                 </td>
                             </tr>
                             <tr>
