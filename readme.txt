@@ -84,6 +84,7 @@ The setup options for the loading screen are:
 **Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
 **Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
 **Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
+**Display image in fullscreen**: allows to adjust the background image in fullscreen mode.
 **Select foreground color**: Allows to select the color of the graphics and texts that display the loading progress information.
 **Apply the effect on page**: Display the page's content with an animation after complete the loading process.
 **Display loading percent**: Shows the percentage of loading. The loading percent is calculated in function of images in the page.
@@ -138,6 +139,7 @@ A: Please be sure you are using a browser with CSS3 support.
 * Improves the plugin documentation.
 * Performs a pre-loading of the images on your website, and displays a loading progress screen with percentage of completion.
 * Allows to display an image as background of the loading screen.
+* Allows to display the background image in fullscreen mode.
 * Associates effects to the page loaded.
 * Allows to display the loading screen only on homepage, all pages, or particular pages of website.
 * Corrects an issue with the resources loaded in Internet Explorer.
