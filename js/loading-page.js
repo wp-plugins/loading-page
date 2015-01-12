@@ -104,9 +104,10 @@
             {
                 lp.completeImageLoading();
                 continue;
-            }            
+            } 
+            
             $.ajax({
-                url: images[i],
+                url: images[i]+( ( /\?/.test( images[i] ) ) ? '&' : '?' )+'rand='+Math.random(),
                 type: 'HEAD',
 				timeout: 3000,
                 complete: function(data) {
@@ -174,11 +175,7 @@
 
             for (var i = 0; i < urls.length; i++) {
                 if (urls[i].length > 0 && images.indexOf(urls[i]) == -1) {
-                    var extra = "";
-                    if (browser.msie && browser.version < 9) {
-                        extra = "?" + Math.floor(Math.random() * 3000);
-                    }
-                    images.push(urls[i] + extra);
+                    images.push( urls[i] );
                 }
             }
         }
