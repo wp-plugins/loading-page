@@ -21,8 +21,9 @@ include LOADING_PAGE_PLUGIN_DIR.'/includes/admin_functions.php';
 */
 register_activation_hook( __FILE__, 'loading_page_install' );
 if(!function_exists('loading_page_install')){        
-	function loading_page_install() {
-        // Set the default options here
+	function _loading_page_options()
+	{
+		// Set the default options here
         $loading_page_options = array(
             'foregroundColor'           => '#FFFFFF',
             'backgroundColor'           => '#000000',
@@ -38,9 +39,41 @@ if(!function_exists('loading_page_install')){
         );
         
         update_option('loading_page_options', $loading_page_options);
-        
+    }
+	function loading_page_install( $networkwide ) {
+		global $wpdb;
+		
+		if (function_exists('is_multisite') && is_multisite()) {
+			if ($networkwide) {
+	            $old_blog = $wpdb->blogid;
+				// Get all blog ids
+				$blogids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+				foreach ($blogids as $blog_id) {
+					switch_to_blog($blog_id);
+					_loading_page_options();
+				}
+				switch_to_blog($old_blog);
+				return;
+			}
+		}
+		_loading_page_options();
 	} // End loading_page_install
 } // End plugin activation
+
+/** 
+*	A new blog has been created in a multisite WordPress
+*/	
+add_action( 'wpmu_new_blog', 'loading_page_new_blog', 10, 6);        
+function loading_page_new_blog($blog_id, $user_id, $domain, $path, $site_id, $meta ) {
+    global $wpdb;
+	if ( is_plugin_active_for_network() ) 
+	{
+        $current_blog = $wpdb->blogid;
+        switch_to_blog( $blog_id );
+		_loading_page_options();
+        switch_to_blog( $current_blog );
+    }
+} // End loading_page_new_blog
 
 /*
 *   Plugin initializing
