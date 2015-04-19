@@ -25,7 +25,7 @@
                 css_o['backgroundImage']  = 'url('+options[ 'backgroundImage' ]+')';
                 css_o['background-repeat'] = options[ 'backgroundRepeat' ];
                 css_o['background-position'] = 'center center';
-                
+
                 if( 
                     css_o['background-repeat'].toLowerCase() == 'no-repeat' && 
                     typeof options['fullscreen'] !== 'undefined' &&
@@ -33,10 +33,10 @@
                 )
                 {
                     css_o[ "background-attachment" ] = "fixed";
-                    css_o[ "-webkit-background-size" ] = "cover";
-                    css_o[ "-moz-background-size" ] = "cover";
-                    css_o[ "-o-background-size" ] = "cover";
-                    css_o[ "background-size" ] = "cover";
+                    css_o[ "-webkit-background-size" ] = "contain";
+                    css_o[ "-moz-background-size" ] = "contain";
+                    css_o[ "-o-background-size" ] = "contain";
+                    css_o[ "background-size" ] = "contain";
                 }
             }
             
