@@ -227,7 +227,8 @@
 					{
 						setTimeout( function(){ loading_page_available_body(); }, 30 );
 					}	
-				}	
+				}
+				jQuery( 'body' ).loadingpage( loading_page_settings );
 			}
 			else
 			{
@@ -236,10 +237,5 @@
 		}	
 		
 		loading_page_available_body( loading_page_settings );
-		
-		// Define the on-load event handle
-		jQuery(document).ready(function () {
-			jQuery("body").loadingpage( loading_page_settings );
-		});
 	}
 })(jQuery);
