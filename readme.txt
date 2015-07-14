@@ -4,7 +4,7 @@ Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
 Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect,posts,Post,admin,plugin,fullscreen
 Requires at least: 3.0.5
 Tested up to: 4.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,7 @@ The base plugin, available for free from the WordPress Plugin Directory, has all
 * Allows to select from multiple possible animations, to display the page's content after complete the loading process.
 * Improves the page performance.
 * Lazy Loading feature allows to load faster and reduce the bandwidth consumption. The images are big consumers of bandwidth and loading time, so a WordPress website with multiple images can improve its performance and reduce the loading time with the lazy loading feature. 
-* Allows to select an image as a placeholder, to replace the real images during pre-loading. It's recommended to select the lighter images possible to increase the WordPress performance, the image selected will be used in place of images that are not loaded in the first viewport.
+* Allows to select an image as a placeholder, to replace the real images during pre-loading. It's recommended to select the lighter images possible to increase the WordPress performance, the image selected will be used instead of the original images, in the loading page process.
 
 **Demo of Premium Version of Plugin**
 
@@ -50,9 +50,7 @@ The base plugin, available for free from the WordPress Plugin Directory, has all
 
 **What is Lazy Loading?**
 
-Lazy Loading means that images outside of viewport (visible part of webpage) will not be loaded before user scrolls to them, this action improve the download speed of webpages and reduce the bandwidth consumption. With lazy loading the WordPress performance is increased substantially. 
-
-Normally we only see a part of a webpage we are visiting. To see the rest we usually have to scroll down. For example, in pages with a lot of content in the middle, we can’t see the footer without scrolling down. If Lazy Loading is enabled, only the images in areas that are actually viewed by the user are loaded, and the render time of completed page is reduced. The images in all other areas are loaded only when the user attempts to actually view them by scrolling down to them. This technique increases the loading speed and reduces the bandwidth consumption, as it only loads the images in areas actually "consumed" by the user.
+Lazy Loading means that original won't be loaded until finalize the loading page process, to improve the download speed of webpages. With lazy loading the WordPress performance is increased substantially.
 
 If you want more information about this plugin or another one don't doubt to visit my website:
 
@@ -80,7 +78,9 @@ The Loading Page with Loading Screen setup is divided in two sections: the first
 The setup options for the loading screen are:  
 
 * **Enable loading screen**: activates preloading of images and displays a loading screen while the webpage is loading. 
+* **Display the loading screen once per session**: display the loading screen only once per session. 
 * **Display loading screen only in**: displays a loading screen only on homepage, all pages, or specific pages or posts. In the last case the IDs of pages or posts should be separated by comma symbol "," 
+* **Exclude the loading screen from**: excludes the loading screen from pages or posts whose IDs are entered separated by comma symbol "," 
 * **Select the loading screen**: allows to choose a loading screen. The premium version of plugin include multiple loading screens.
 * **Select background color**: allows to select the background color for your loading screen compatible with the design guidelines of your website.
 * **Select images as background**: allows to display an image as loading screen background, the image can be displayed tiled or centered.
@@ -146,3 +146,19 @@ A: Please be sure you are using a browser with CSS3 support.
 * Reduces the interval of time to display the loading screen.
 * Corrects an issue with the percentage text in the loading screen.
 * Excludes some files from the loading process.
+
+= 1.0.2 =
+
+* Includes the feature to display the loading screen once per session.
+* Includes the feature for excluding the loading screen from specific pages and posts.
+* Modifies the behavior of the lazy loading images.
+
+== Upgrade Notice ==
+
+= 1.0.2 =
+
+* Includes the feature to display the loading screen once per session.
+* Includes the feature for excluding the loading screen from specific pages and posts.
+* Modifies the behavior of the lazy loading images.
+
+Important note: If you are using the Professional version don't update via the WP dashboard but using your personal update link. Contact us if you need further information: http://wordpress.dwbooster.com/support

@@ -3,7 +3,7 @@
 Plugin Name: Loading Page
 Plugin URI: http://wordpress.dwbooster.com/content-tools/loading-page
 Description: Loading Page plugin performs a pre-loading of images on your website and displays a loading progress screen with percentage of completion. Once everything is loaded, the screen disappears.
-Version: 1.0.1
+Version: 1.0.2
 Author: CodePeople
 Author URI: http://www.codepeople.net
 License: GPLv2
@@ -30,7 +30,9 @@ if(!function_exists('loading_page_install')){
             'enabled_loading_screen'    => true,
             'loading_screen'            => 'bar',
             'lp_loading_screen_display_in'  => 'all',
+			'once_per_session'  		=> false,
 			'lp_loading_screen_display_in_pages' => '',
+			'lp_loading_screen_exclude_from_pages' => '',
             'displayPercent'            => true,
             'backgroundImage'           => '',
             'backgroundImageRepeat'     => 'repeat',
@@ -159,19 +161,34 @@ if(!function_exists('loading_page_admin_resources')){
 if( !function_exists('loading_page_loading_screen') ){
     function loading_page_loading_screen(){
         global $post;
+		if( session_id() == "" ) session_start();
         $op = get_option('loading_page_options');
         $loadingScreen = 0;
-        if( !empty( $op['enabled_loading_screen'] ) )
+        if( 
+			( empty( $op[ 'once_per_session' ] ) || ( $op[ 'once_per_session' ] == true && empty( $_SESSION[ 'loading_page_once_per_session' ] ) ) ) &&
+			!empty( $op['enabled_loading_screen'] ) 
+		)
         {
+			$_SESSION[ 'loading_page_once_per_session' ] = 1;
             $pages = ( !empty( $op[ 'lp_loading_screen_display_in_pages' ] ) ) ? $op[ 'lp_loading_screen_display_in_pages' ] : '';
             $pages = str_replace( ' ', '', $pages );
             $pages = explode( ',', $pages );
             
+			$exclude_pages = ( !empty( $op[ 'lp_loading_screen_exclude_from_pages' ] ) ) ? $op[ 'lp_loading_screen_exclude_from_pages' ] : '';
+            $exclude_pages = str_replace( ' ', '', $exclude_pages );
+            $exclude_pages = explode( ',', $exclude_pages );
+
             if(
-                empty( $op[ 'lp_loading_screen_display_in' ] ) ||
-                $op[ 'lp_loading_screen_display_in' ] == 'all' ||
-                ( $op[ 'lp_loading_screen_display_in' ] == 'home' && ( is_home() || is_front_page() ) ) ||
-                ( $op[ 'lp_loading_screen_display_in' ] == 'pages' && isset( $post ) && in_array( $post->ID, $pages )  )
+                (
+					empty( $op[ 'lp_loading_screen_display_in' ] ) ||
+					$op[ 'lp_loading_screen_display_in' ] == 'all' ||
+					( $op[ 'lp_loading_screen_display_in' ] == 'home' && ( is_home() || is_front_page() ) ) ||
+					( $op[ 'lp_loading_screen_display_in' ] == 'pages' && isset( $post ) && in_array( $post->ID, $pages )  )
+				) &&
+				(
+					empty( $exclude_pages ) || 
+					!in_array( $post->ID, $exclude_pages )
+				)
             )
             {
                 $loadingScreen = 1;
@@ -234,7 +251,9 @@ if(!function_exists('loading_page_settings_page')){
                 'fullscreen'                => ( isset( $_POST['lp_fullscreen'] ) ) ? 1 : 0,
                 'enabled_loading_screen'    => (isset($_POST['lp_enabled_loading_screen'])) ? true : false,
                 'lp_loading_screen_display_in'  	 => ( isset( $_POST[ 'lp_loading_screen_display_in' ] ) ) ? $_POST[ 'lp_loading_screen_display_in' ] : 'all',
+				'once_per_session'			=> ( isset( $_POST[ 'once_per_session' ] ) ) ? true : false,
 				'lp_loading_screen_display_in_pages' => $_POST[ 'lp_loading_screen_display_in_pages' ],
+				'lp_loading_screen_exclude_from_pages' => $_POST[ 'lp_loading_screen_exclude_from_pages' ],
                 'loading_screen'            => 'bar',
                 'displayPercent'            => (isset($_POST['lp_displayPercent'])) ? true : false,
                 'pageEffect'                => $_POST['lp_pageEffect']
@@ -269,6 +288,10 @@ if(!function_exists('loading_page_settings_page')){
                                 <th><?php _e('Enable loading screen', LOADING_PAGE_TD); ?></th>
                                 <td><input type="checkbox" name="lp_enabled_loading_screen" <?php echo(($loading_page_options['enabled_loading_screen']) ? 'CHECKED' : '' ); ?> /></td>
                             </tr>
+							<tr>
+								<th><?php _e('Display the loading screen once per session', LOADING_PAGE_TD); ?></th>
+								<td><input type="checkbox" name="once_per_session" <?php echo(( isset( $loading_page_options['once_per_session'] ) && $loading_page_options['once_per_session']) ? 'CHECKED' : '' ); ?> /></td>
+							</tr>
                             <tr>
                                 <th><?php _e('Display loading screen in', LOADING_PAGE_TD); ?></th>
                                 <td>
@@ -279,6 +302,10 @@ if(!function_exists('loading_page_settings_page')){
 									
 								</td>
                             </tr>
+							<tr>
+								<th><?php _e( 'Exclude loading screen from' ); ?></th>
+								<td><input type="text" name="lp_loading_screen_exclude_from_pages" value="<?php if( !empty( $loading_page_options['lp_loading_screen_exclude_from_pages'] ) ) print $loading_page_options['lp_loading_screen_exclude_from_pages']; ?>"> <span>In this case should be typed one, or more IDs for posts or pages, separated by the comma symbol ","</span></td>
+							</tr>
                             <tr>
                                 <?php $loading_screens = loading_page_get_screen_list();?>    
                                 <th><?php _e('Select the loading screen', LOADING_PAGE_TD); ?></th>
