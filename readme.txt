@@ -50,7 +50,7 @@ The base plugin, available for free from the WordPress Plugin Directory, has all
 
 **What is Lazy Loading?**
 
-Lazy Loading means that original won't be loaded until finalize the loading page process, to improve the download speed of webpages. With lazy loading the WordPress performance is increased substantially.
+Lazy Loading means that the original images are not loaded until finalize the loading of page. This action improves the download speed of webpages.
 
 If you want more information about this plugin or another one don't doubt to visit my website:
 
