@@ -86,6 +86,9 @@
         var currentTime = new Date();
         start = currentTime.getTime();
 
+        if( typeof loading_screen_is_running != 'undefined' ) return;
+		loading_screen_is_running = true;
+		
         lp.createPreloadContainer();
         lp.createOverlayLoader();
     };
