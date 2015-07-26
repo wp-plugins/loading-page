@@ -10,12 +10,13 @@ function loading_page_get_screen_list(){
                 $screen_dir = $dir.'/'.$entry.'/';
                 if(file_exists($screen_dir.'config.ini')){
                     $c = parse_ini_file($screen_dir.'config.ini', true);
-                    
-                    if(!empty($c['script'])){
+                    if( empty( $c ) ) $c = parse_ini_string( file_get_contents( $screen_dir.'config.ini' ), true );
+					
+                    if( !empty( $c ) && !empty( $c['script'] ) ){
                         $c['script'] = LOADING_PAGE_PLUGIN_URL.'/loading-screens/'.$entry.'/'.$c['script'];
                     }
                     
-                    if(!empty($c['style'])){
+                    if( !empty( $c ) && !empty( $c['style'] ) ){
                         $c['style'] = LOADING_PAGE_PLUGIN_URL.'/loading-screens/'.$entry.'/'.$c['style'];
                     }
                     
