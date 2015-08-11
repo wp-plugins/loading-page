@@ -3,7 +3,7 @@
 Plugin Name: Loading Page
 Plugin URI: http://wordpress.dwbooster.com/content-tools/loading-page
 Description: Loading Page plugin performs a pre-loading of images on your website and displays a loading progress screen with percentage of completion. Once everything is loaded, the screen disappears.
-Version: 1.0.4
+Version: 1.0.5
 Author: CodePeople
 Author URI: http://www.codepeople.net
 License: GPLv2
@@ -164,6 +164,14 @@ if( !function_exists('loading_page_loading_screen') ){
 		if( session_id() == "" ) session_start();
         $op = get_option('loading_page_options');
         $loadingScreen = 0;
+        if(
+			!isset( $_SERVER['HTTP_USER_AGENT'] ) || 
+			preg_match( '/bot|crawl|slurp|spider/i', $_SERVER[ 'HTTP_USER_AGENT' ] ) 
+		) 
+		{
+			return $loadingScreen;
+		}
+		
         if( 
 			( empty( $op[ 'once_per_session' ] ) || ( $op[ 'once_per_session' ] == true && empty( $_SESSION[ 'loading_page_once_per_session' ] ) ) ) &&
 			!empty( $op['enabled_loading_screen'] ) 

@@ -4,7 +4,7 @@ Donate link: http://wordpress.dwbooster.com/content-tools/loading-page
 Tags:animation,page performance,page effects,performance,render time,wordpress performance,image,images,load,loading,lazy,screen,loading screen,lazy loading,fade effect,posts,Post,admin,plugin,fullscreen
 Requires at least: 3.0.5
 Tested up to: 4.3
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -161,10 +161,14 @@ A: Please be sure you are using a browser with CSS3 support.
 
 * Improves the module for parsing the config.ini files of the loading screens.
 
+= 1.0.5 =
+
+* Prevents to use the loading screen when the website is accessed from search crawlers or spiders.
+
 == Upgrade Notice ==
 
-= 1.0.4 =
+= 1.0.5 =
 
-* Improves the module for parsing the config.ini files of the loading screens.
+* Prevents to use the loading screen when the website is accessed from search crawlers or spiders.
 
 Important note: If you are using the Professional version don't update via the WP dashboard but using your personal update link. Contact us if you need further information: http://wordpress.dwbooster.com/support
